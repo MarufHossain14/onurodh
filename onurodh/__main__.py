@@ -1,13 +1,10 @@
 import argparse
-
-from quaeso.yeet import Yeeter
-
+from onurodh.yeet import Yeeter  # Adjusted the import to "onurodh"
 
 def main():
     args = parse_args()
-    yeeter = Yeeter(args.colorize)
-    yeeter.yeet(args.filepath)
-
+    yeeter = Yeeter(args.colorize)  # The Yeeter handles the colorization and output logic
+    yeeter.yeet(args.filepath)  # Executes the request from the given filepath
 
 def parse_args():
     ap = argparse.ArgumentParser(allow_abbrev=False)
@@ -22,6 +19,9 @@ def parse_args():
         "-c",
         "--colorize",
         action='store_true',
-        help="colorize stdout and stderr"
+        help="Colorize stdout and stderr"
     )
     return ap.parse_args()
+
+if __name__ == "__main__":
+    main()

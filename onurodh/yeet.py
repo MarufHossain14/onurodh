@@ -1,53 +1,53 @@
 import json
-import sys
-from collections import namedtuple
-
-from requests.api import request
-from requests import Response
-from quaeso import formatter
-
-from quaeso.reader import read_request_file
-from quaeso.writer import write
-from quaeso import colorizer
-
+import yaml
+from onurodh.colorizer import Colorizer  # Adjusted import to "onurodh"
+from onurodh.reader import read_file
+from onurodh.formatter import format_output
+from onurodh.writer import write_response
 
 class Yeeter:
-    Visual = namedtuple("Visual", ["formatter", "colorizer"])
+    def __init__(self, colorize=False):
+        self.colorizer = Colorizer() if colorize else None
 
-    def __init__(self, colorize: bool = True):
-        sys.stdout.reconfigure(encoding='utf-8')
+    def yeet(self, filepath):
+        try:
+            # Reading request data from file
+            request_data = read_file(filepath)
+            response = self._send_request(request_data)
 
-        # if output stays on terminal then isatty() returns True
-        # if output is redirected to file then isatty() returns False
-        self.colorize_stdout: bool = colorize and sys.stdout.isatty()
-        self.colorize_stderr: bool = colorize and sys.stderr.isatty()
+            # Formatting the response
+            formatted_response = format_output(response)
 
-        self.content_type_visual = {}
-        for content_type, formatter_fn, colorizer_fn in [
-            ("application/json", formatter.format_json_string, colorizer.colorize_json_string),
-            ("text/xml", formatter.format_xml_string, colorizer.colorize_xml_string),
-            ("text/html", formatter.format_html_string, colorizer.colorize_html_string)
-        ]:
-            self.content_type_visual[content_type] = self.Visual(formatter_fn, colorizer_fn)
+            # Colorizing output if needed
+            if self.colorizer:
+                formatted_response = self.colorizer.colorize(formatted_response)
+            
+            # Writing response to stdout
+            write_response(formatted_response)
 
-    def yeet(self, request_filepath):
-        request_data: dict = read_request_file(request_filepath)
-        response: Response = request(**request_data)
+        except Exception as e:
+            print(f"An error occurred: {str(e)}")
 
-        metadata_text = json.dumps(dict(**response.headers, **{"status": response.status_code, "url": response.url}))
-        write(metadata_text, sys.stderr,
-              formatter=formatter.format_metadata,
-              colorizer=colorizer.colorize_metadata_string if self.colorize_stderr else None)
+    def _send_request(self, request_data):
+        # Simplified request sending logic for Onurodh
+        import requests
+        method = request_data.get('method', 'GET').upper()
+        url = request_data.get('url')
+        headers = request_data.get('headers', {})
+        data = request_data.get('data', {})
+        params = request_data.get('params', {})
+        
+        try:
+            if method == 'GET':
+                return requests.get(url, headers=headers, params=params)
+            elif method == 'POST':
+                return requests.post(url, headers=headers, json=data)
+            elif method == 'PUT':
+                return requests.put(url, headers=headers, json=data)
+            elif method == 'DELETE':
+                return requests.delete(url, headers=headers)
+            else:
+                raise ValueError(f"Unsupported method: {method}")
+        except requests.RequestException as e:
+            raise Exception(f"Request failed: {e}")
 
-        content_type: str = self._get_content_type(response)
-        if content_type in self.content_type_visual.keys():
-            write(response.content.decode('utf-8'), sys.stdout,
-                  formatter=self.content_type_visual[content_type].formatter,
-                  colorizer=self.content_type_visual[content_type].colorizer if self.colorize_stdout else None)
-        else:
-            write(response.content, sys.stdout.buffer, formatter=None, colorizer=None)
-
-    @staticmethod
-    def _get_content_type(res: Response) -> str:
-        content_type, *_ = res.headers["content-type"].split(";")
-        return content_type.strip().lower()

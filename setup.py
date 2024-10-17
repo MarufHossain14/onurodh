@@ -1,40 +1,29 @@
-# pip3 install setuptools twine wheel
-# python3 setup.py sdist bdist_wheel
-# twine upload dist/*
-
-
-import pathlib
-from setuptools import setup
-
-# The directory containing this file
-HERE = pathlib.Path(__file__).parent
-
-README = (HERE / "README.md").read_text()
-
-with (HERE / "requirements.txt").open() as f:
-    requirements = f.read().splitlines()
+from setuptools import setup, find_packages
 
 setup(
-    name="quaeso",
-    version="0.1.2",
-    description="python cli program to send requests",
-    long_description=README,
-    long_description_content_type="text/markdown",
-    url="https://github.com/zahash/quaeso",
-    author="zahash",
-    author_email="zahash.z@gmail.com",
+    name="onurodh",
+    version="1.0.0",
+    description="A Python CLI for sending requests from JSON or YAML configuration files.",
+    author="Maruf",
+    author_email="hossain.maruf186@gmail.com",
     license="MIT",
+    url="https://github.com/MarufHossain14/onurodh",
+    packages=find_packages(),
+    install_requires=[
+        "requests>=2.0.0,<3.0.0",
+        "PyYAML>=6.0.0,<7.0.0",
+        "lxml>=4.0.0,<5.0.0",
+        "Pygments>=2.0.0,<3.0.0",
+    ],
     entry_points={
-        'console_scripts': [
-            'quaeso = quaeso.__main__:main',
+        "console_scripts": [
+            "onurodh=onurodh.__main__:main",
         ],
     },
-    python_requires='>=3.8',
     classifiers=[
-        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
     ],
-    packages=["quaeso"],
-    include_package_data=True,
-    install_requires=requirements,
+    python_requires='>=3.6',
 )

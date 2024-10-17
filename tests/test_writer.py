@@ -1,5 +1,5 @@
 import unittest
-from onurodh import writer  # Updated import
+from onurodh import writer
 
 
 class FakeWriteable:

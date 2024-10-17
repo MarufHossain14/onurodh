@@ -1,6 +1,6 @@
 import json
 import yaml
-from onurodh.colorizer import Colorizer  # Adjusted import to "onurodh"
+from onurodh.colorizer import Colorizer 
 from onurodh.reader import read_file
 from onurodh.formatter import format_output
 from onurodh.writer import write_response

@@ -2,7 +2,7 @@ import json
 import yaml
 import tempfile
 import unittest
-from onurodh import reader  # Updated import
+from onurodh import reader 
 
 
 class TestReader(unittest.TestCase):

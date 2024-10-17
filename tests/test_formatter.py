@@ -1,5 +1,5 @@
 import unittest
-from onurodh import formatter  # Updated import
+from onurodh import formatter 
 
 
 class TestFormatter(unittest.TestCase):

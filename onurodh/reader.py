@@ -1,20 +1,12 @@
 import json
 import yaml
-from functools import partial
 
-
-class UnsupportedFileTypeException(Exception): pass
-
-
-def read_request_file(filepath) -> dict:
-    if filepath.endswith(".yml") or filepath.endswith(".yaml"):
-        loader = partial(yaml.load, Loader=yaml.FullLoader)
-    elif filepath.endswith(".json"):
-        loader = json.load
+def read_file(filepath):
+    if filepath.endswith(".json"):
+        with open(filepath, 'r') as file:
+            return json.load(file)
+    elif filepath.endswith(".yml") or filepath.endswith(".yaml"):
+        with open(filepath, 'r') as file:
+            return yaml.safe_load(file)
     else:
-        raise UnsupportedFileTypeException(filepath)
-
-    with open(filepath, "r") as f:
-        file_data = loader(f)
-
-    return file_data
+        raise ValueError("Unsupported file format. Use .json or .yaml/.yml")

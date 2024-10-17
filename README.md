@@ -157,7 +157,7 @@ verify: true # TLS certificate verification (true/false or path to cert)
 1. Clone the repo and install the dependencies:
 
 ```bash
-git clone https://github.com/yourusername/onurodh.git](https://github.com/MarufHossain14/onurodh.git
+git clone https://github.com/MarufHossain14/onurodh.git
 cd onurodh
 pip install -r requirements.txt
 ```

@@ -8,7 +8,7 @@
 
 ## Installation
 
-```bas
+```bash
 pip install onurodh
 ```
 

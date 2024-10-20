@@ -1,4 +1,19 @@
 # Onurodh - Python CLI Program for Sending Requests
+<div align="center">
+<pre>
+  sSSSs   d s  b d       b d ss.    sSSSs   d ss    d    d 
+ S     S  S  S S S       S S    b  S     S  S   ~o  S    S 
+S       S S   SS S       S S    P S       S S     b S    S 
+S       S S    S S       S S sS'  S       S S     S S sSSS 
+S       S S    S S       S S   S  S       S S     P S    S 
+ S     S  S    S  S     S  S    S  S     S  S    S  S    S 
+  "sss"   P    P   "sss"   P    P   "sss"   P ss"   P    P 
+                                                           
+                                                                  
+Python CLI program for sending HTTP requests
+</pre>
+</div>
+
 
 ## Project Overview
 

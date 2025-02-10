@@ -19,7 +19,7 @@ def parse_args():
         "-c",
         "--colorize",
         action='store_true',
-        help="Enable  output for stdout and stderr" 
+        help="Enable colorized output for stdout and stderr" 
     )
     return ap.parse_args()
 

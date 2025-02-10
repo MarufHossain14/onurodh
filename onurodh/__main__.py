@@ -4,8 +4,10 @@ from onurodh.yeet import Yeeter  # Adjusted the import to "onurodh"
 def main():
     args = parse_args()
     if not args.filepath.lower().endswith(('.json', '.yaml', '.yml')):
+        raise ValueError("Unsupported file format. Please provide a .json, .yaml, or .yml file.")  
+    yeeter = Yeeter(args.colorize)
+    yeeter.yeet(args.filepath)
 
-    yeeter.yeet(args.filepath)  # Executes the request from the given filepath
 
 def parse_args():
     ap = argparse.ArgumentParser(allow_abbrev=False)

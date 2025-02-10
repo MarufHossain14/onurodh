@@ -11,7 +11,8 @@ def parse_args():
     ap.add_argument(
         "-f",
         "--filepath",
-        
+        type=str,
+        required=True,
         help="Request file path in .json, .yaml, or .yml format",  
     )
     ap.add_argument(

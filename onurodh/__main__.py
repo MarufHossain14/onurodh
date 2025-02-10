@@ -3,7 +3,8 @@ from onurodh.yeet import Yeeter  # Adjusted the import to "onurodh"
 
 def main():
     args = parse_args()
-    yeeter = Yeeter(args.colorize)  # The Yeeter handles the colorization and output logic
+    if not args.filepath.lower().endswith(('.json', '.yaml', '.yml')):
+
     yeeter.yeet(args.filepath)  # Executes the request from the given filepath
 
 def parse_args():

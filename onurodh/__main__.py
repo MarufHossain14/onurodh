@@ -9,18 +9,17 @@ def parse_args():
         allow_abbrev=False
     )
     ap.add_argument(
-        "-f",
-        "--filepath",
+        "-f", "--filepath",
         type=str,
         required=True,
-        help="Request file path in .json, .yaml, or .yml format",  
+        help="Path to the request file (.json, .yaml, or .yml format)",
     )
     ap.add_argument(
-        "-c",
-        "--colorize",
-        action='store_true',
-        help="Enable colorized output for stdout and stderr" 
+        "-c", "--colorize",
+        action='store_true',  
+        help="Enable colorized output for stdout and stderr",
     )
+    
     return ap.parse_args()
 
 def main():

@@ -26,7 +26,7 @@ def main():
     args = parse_args()
     if not args.filepath.lower().endswith(('.json', '.yaml', '.yml')):
         raise ValueError("Unsupported file format. Please provide a .json, .yaml, or .yml file.")  
-    yeeter = Yeeter(args.colorize)
+    yeeter = Yeeter(colorize=args.colorize) 
     yeeter.yeet(args.filepath)
 
 if __name__ == "__main__":

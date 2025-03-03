@@ -1,4 +1,12 @@
 class Colorizer:
-    def colorize(self, text):
-        # Add color codes for terminal output, e.g., green for success, red for errors
-        return f"\033[92m{text}\033[0m"  # Example: wrapping in green color
+    COLORS = {
+        "green": "\033[92m",
+        "red": "\033[91m",
+        "yellow": "\033[93m",
+        "blue": "\033[94m",
+        "reset": "\033[0m",
+    }
+    
+    def colorize(self, text: str, color: str = "green") -> str:
+        return f"{self.COLORS.get(color, self.COLORS['reset'])}{text}{self.COLORS['reset']}"
+

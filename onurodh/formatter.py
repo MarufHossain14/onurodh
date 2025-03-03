@@ -1,6 +1,6 @@
-def format_output(response):
-    # Assuming the response object from the requests module
-    output = f"Status: {response.status_code}\n"
-    output += f"Headers: {response.headers}\n"
-    output += f"Body: {response.text}\n"
-    return output
+def format_output(response: requests.Response) -> str:
+    return (
+        f"Status: {response.status_code}\n"
+        f"Headers: {json.dumps(dict(response.headers), indent=2)}\n"
+        f"Body: {response.text[:500]}...\n"
+    )

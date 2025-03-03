@@ -1,7 +1,7 @@
 import json
 import yaml
 
-def read_file(filepath):
+def read_file(filepath: str) -> Union[dict, list]:
     """
     Reads the content of a file and returns it as a Python object.
 
@@ -24,11 +24,14 @@ def read_file(filepath):
         >>> read_file('config.yaml')
         {'key': 'value'}
     """
-    if filepath.endswith(".json"):
+    """Reads JSON or YAML file and returns parsed content."""
+    try:
         with open(filepath, 'r') as file:
-            return json.load(file)
-    elif filepath.endswith(".yml") or filepath.endswith(".yaml"):
-        with open(filepath, 'r') as file:
-            return yaml.safe_load(file)
-    else:
-        raise ValueError("Unsupported file format. Use .json or .yaml/.yml")
+            if filepath.endswith(".json"):
+                return json.load(file)
+            elif filepath.endswith((".yml", ".yaml")):
+                return yaml.safe_load(file)
+            else:
+                raise ValueError("Unsupported file format. Use .json or .yaml/.yml")
+    except Exception as e:
+        raise RuntimeError(f"Error reading file {filepath}: {e}")

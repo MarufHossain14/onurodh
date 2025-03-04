@@ -3,6 +3,14 @@ from onurodh.yeet import Yeeter  # Adjusted the import to "onurodh"
 
 
 def parse_args():
+    """
+    Parses command-line arguments.
+    Returns:
+        argparse.Namespace: An object containing the parsed command-line arguments.
+    Arguments:
+        -f, --filepath (str, required): Path to the request file (.json, .yaml, or .yml format).
+        -c, --colorize (bool, optional): Enable colorized output for stdout and stderr.
+    """
     """Parses command-line arguments."""  
     ap = argparse.ArgumentParser(
         description="Process a request file and apply colorization if enabled.",  # Improved argparse description
